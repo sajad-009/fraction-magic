@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraction Magic - تبدیل کسر و مخلوط</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        h2 {
+            margin-top: 20px;
+            color: #333;
+        }
+        input {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 120px; /* حداکثر عرض برای ورودی‌ها */
+        }
+        button {
+            padding: 10px 15px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            max-width: 150px; /* حداکثر عرض برای دکمه‌ها */
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Media Queries */
+        @media (max-width: 600px) {
+            input, button {
+                max-width: 100%; /* ورودی‌ها و دکمه‌ها در موبایل تمام عرض را بگیرند */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Fraction Magic</h1>
+        <h2>تبدیل کسر به مخلوط</h2>
+        <input type="number" id="numerator" placeholder="شمارنده" />
+        <input type="number" id="denominator" placeholder="مقام" />
+        <button onclick="convertFractionToMixed()">تبدیل</button>
+        
+        <h2>تبدیل مخلوط به کسر</h2>
+        <input type="number" id="whole" placeholder="عدد صحیح" />
+        <input type="number" id="mixedNumerator" placeholder="شمارنده" />
+        <input type="number" id="mixedDenominator" placeholder="مقام" />
+        <button onclick="convertMixedToFraction()">تبدیل</button>
+        
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function convertFractionToMixed() {
+            const numerator = parseInt(document.getElementById('numerator').value);
+            const denominator = parseInt(document.getElementById('denominator').value);
+            if (denominator === 0) {
+                document.getElementById('result').innerText = "مقام نمی‌تواند صفر باشد.";
+                return;
+            }
+            const whole = Math.floor(numerator / denominator);
+            const newNumerator = numerator % denominator;
+            document.getElementById('result').innerText = `مخلوط: ${whole} و ${newNumerator}/${denominator}`;
+        }
+
+        function convertMixedToFraction() {
+            const whole = parseInt(document.getElementById('whole').value);
+            const mixedNumerator = parseInt(document.getElementById('mixedNumerator').value);
+            const mixedDenominator = parseInt(document.getElementById('mixedDenominator').value);
+            const numerator = (whole * mixedDenominator) + mixedNumerator;
+            document.getElementById('result').innerText = `کسر: ${numerator}/${mixedDenominator}`;
+        }
+    </script>
+</body>
+</html>
